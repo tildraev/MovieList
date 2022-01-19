@@ -29,7 +29,7 @@ class MovieListTableViewController: UITableViewController {
         // Configure the cell...
         let movie = MovieController.sharedInstance.movies[indexPath.row]
         cell.textLabel?.text = movie.title
-        cell.detailTextLabel?.text = "Length: \(movie.runTime) mins"
+        cell.detailTextLabel?.text = "Length: \(movie.runTime) mins. Lead actor: \(movie.leadActor)"
         
         return cell
     }
