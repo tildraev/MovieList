@@ -13,6 +13,11 @@ class MovieListTableViewController: UITableViewController {
     
     //Deleted # of sections because it will default to 1
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return MovieController.sharedInstance.movies.count
@@ -46,7 +51,12 @@ class MovieListTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showMovie" {
+            if let indexPath = tableView.indexPathForSelectedRow,
+               let destination = segue.destination as? MovieDetailViewController {
+                let movieToSend = MovieController.sharedInstance.movies[indexPath.row]
+                destination.movie = movieToSend
+            }
+        }
     }
 }

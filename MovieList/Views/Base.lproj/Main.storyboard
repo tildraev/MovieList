@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +11,7 @@
         <!--Movie List-->
         <scene sceneID="5gy-wc-OeQ">
             <objects>
-                <tableViewController id="bSe-aY-Kmm" sceneMemberID="viewController">
+                <tableViewController id="bSe-aY-Kmm" customClass="MovieListTableViewController" customModule="MovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="MP1-id-SSg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,6 +24,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Yoo-aD-67t" kind="show" identifier="showMovie" id="euq-mi-I3R"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -31,12 +35,99 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movie List" id="03Y-6J-nbX">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Tgo-8o-BeB"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Tgo-8o-BeB">
+                            <connections>
+                                <segue destination="Yoo-aD-67t" kind="show" id="dSV-z4-ENW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pg4-X7-B8b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="784" y="160"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="zmQ-Sj-Cvs">
+            <objects>
+                <viewController id="Yoo-aD-67t" customClass="MovieDetailViewController" customModule="MovieList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PmL-M2-6ud">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="01q-af-X3V">
+                                <rect key="frame" x="20" y="103" width="374" height="179"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Movie Name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I8T-ba-dWq">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Run Time..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5C-Or-U0D">
+                                        <rect key="frame" x="0.0" y="47" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lead Actor..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ED1-dN-UFZ">
+                                        <rect key="frame" x="0.0" y="94" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="EX4-wo-LHt">
+                                        <rect key="frame" x="0.0" y="141" width="374" height="38"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0f-rf-WRJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="169.5" height="38"/>
+                                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Clear">
+                                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="clearButtonTapped:" destination="Yoo-aD-67t" eventType="touchUpInside" id="cSz-L0-F0N"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZ0-7L-9id">
+                                                <rect key="frame" x="204.5" y="0.0" width="169.5" height="38"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Delete">
+                                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="deleteButtonTapped:" destination="Yoo-aD-67t" eventType="touchUpInside" id="upW-9E-1Jx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pBX-Ud-woW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="01q-af-X3V" firstAttribute="leading" secondItem="pBX-Ud-woW" secondAttribute="leading" constant="20" id="NRC-pX-1ir"/>
+                            <constraint firstItem="01q-af-X3V" firstAttribute="top" secondItem="pBX-Ud-woW" secondAttribute="top" constant="15" id="ZVC-kx-vCk"/>
+                            <constraint firstItem="pBX-Ud-woW" firstAttribute="trailing" secondItem="01q-af-X3V" secondAttribute="trailing" constant="20" id="kZv-Uu-ENP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="imD-HF-3cF">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="eSw-2Y-K80">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="Yoo-aD-67t" id="DDn-Md-xWT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leadActorTextField" destination="ED1-dN-UFZ" id="Upd-V6-M4G"/>
+                        <outlet property="movieNameTextField" destination="I8T-ba-dWq" id="hrc-EB-lsk"/>
+                        <outlet property="runTimeTextField" destination="y5C-Or-U0D" id="e3e-04-Fyv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z1Q-Pv-U16" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1651" y="159"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="doG-F7-wAo">
@@ -55,9 +146,18 @@
             <point key="canvasLocation" x="-105" y="160"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="euq-mi-I3R"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

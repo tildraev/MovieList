@@ -11,7 +11,6 @@ class MovieController {
     // MARK: - Properties
     static let sharedInstance = MovieController()
     var movies = [Movie]()
-    
     // MARK: - Crud
     func createMovie(name: String, runTime: Int, leadActor: String) {
         let newMovie = Movie(title: name, runTime: runTime, leadActor: leadActor)
